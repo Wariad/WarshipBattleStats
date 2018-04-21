@@ -3,16 +3,17 @@ Imports System.IO
 Imports System.Net
 Imports System.Drawing
 Imports Newtonsoft.Json
+Imports WargamingDatabase
 
 Public MustInherit Class WargamingDataServiceBase
 
 #Region "declares..."
 
-    Protected _ServerRealm As ServerRealm
-    Protected _Game As Game
+    Protected _ServerRealm As Data.Common.ServerRealm
+    Protected _Game As Data.Common.Game
 #End Region
 
-    Friend Sub New(serverRealm As ServerRealm, game As Game)
+    Friend Sub New(serverRealm As Data.Common.ServerRealm, game As Data.Common.Game)
 
         Me._ServerRealm = serverRealm
         Me._Game = game
@@ -34,7 +35,11 @@ Public MustInherit Class WargamingDataServiceBase
 
     Protected Function DeserialiseJson(Of T)(s As String) As T
 
-        Return CType(JsonConvert.DeserializeObject(Of T)(s), T)
+        Dim settings As New JsonSerializerSettings
+        settings.NullValueHandling = NullValueHandling.Ignore
+        settings.Converters.Add(New Newtonsoft.Json.Converters.UnixDateTimeConverter)
+
+        Return CType(JsonConvert.DeserializeObject(Of T)(s, settings), T)
 
     End Function
 
@@ -80,14 +85,15 @@ Public MustInherit Class WargamingDataServiceBase
 
     Public Function GetImage(url As String) As Image
 
+        Debug.WriteLine(url)
+
         Dim Request As HttpWebRequest = Nothing
         Dim Response As WebResponse = Nothing
         Dim Stream As Stream = Nothing
-        Dim Reader As StreamReader = Nothing
 
         Dim Tries As Int32 = 0
         Dim Success As Boolean = False
-        Dim Result As String = ""
+        Dim Result As Image = Nothing
         Dim Ex As Exception = Nothing
 
         Try
@@ -99,14 +105,11 @@ Public MustInherit Class WargamingDataServiceBase
             Request.ProtocolVersion = HttpVersion.Version10
             Response = Request.GetResponse
             Stream = Response.GetResponseStream
-            Reader = New StreamReader(Stream)
-
-            Result = Reader.ReadToEnd
+            Result = Image.FromStream(Stream)
 
         Catch Ex : Finally
             If Response IsNot Nothing Then
                 Response.Close()
-                Reader.Close()
             End If
         End Try
 
@@ -114,7 +117,8 @@ Public MustInherit Class WargamingDataServiceBase
             Throw Ex
         End If
 
-        '  Return Result
+        Return Result
+
 
     End Function
 
@@ -122,28 +126,28 @@ Public MustInherit Class WargamingDataServiceBase
 
 #Region "Properties..."
 
-    Protected ReadOnly Property RealmURL(serverRealm As ServerRealm, game As Game) As String
+    Protected ReadOnly Property RealmURL(serverRealm As Data.Common.ServerRealm, game As Data.Common.Game) As String
         Get
 
             Dim url As String = ""
 
             Select Case serverRealm
-                Case ServerRealm.RU
+                Case Data.Common.ServerRealm.RU
                     url = "https://api.{0}.ru/{1}"
-                Case ServerRealm.EU
+                Case Data.Common.ServerRealm.EU
                     url = "https://api.{0}.eu/{1}"
-                Case ServerRealm.NA
+                Case Data.Common.ServerRealm.NA
                     url = "https://api.{0}.com/{1}"
-                Case ServerRealm.ASIA
+                Case Data.Common.ServerRealm.ASIA
                     url = "https://api.{0}.asia/{1}"
             End Select
 
             Select Case game
-                Case Game.WOT
+                Case Data.Common.Game.WOT
                     url = String.Format(url, "worldoftanks", "wot")
-                Case Game.WOWS
+                Case Data.Common.Game.WOWS
                     url = String.Format(url, "worldofwarships", "wows")
-                Case Game.WOWP
+                Case Data.Common.Game.WOWP
                     url = String.Format(url, "worldofwarplanes", "wowp")
             End Select
 

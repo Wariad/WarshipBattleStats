@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WarshipBattleStats"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowStyle="None" >
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/splash.png"/>
+    </Window.Background>
     <Grid>
-        
+        <Label Content="...Loading" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="16" Margin="271,0,123,12" Width="123" />
+        <Label Content="Warship Battle Stats" HorizontalAlignment="Right" VerticalAlignment="bottom" FontSize="24" Foreground="white"  FontWeight="Medium" Margin="0,0,279,10"  />
+        <Label  Content="...Loading" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="16" Margin="271,0,123,12" Width="123" />
+        <Canvas Name="prg_firstdata" Visibility="Hidden"    HorizontalAlignment="Center" Height="100"  VerticalAlignment="Center" Width="347">
+            <Canvas.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF021F08"/>
+                    <GradientStop Color="#FF5F8F6B" Offset="0.937"/>
+                </LinearGradientBrush>
+            </Canvas.Background>
+
+            <Label Content="Getting initial data" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="16"  Canvas.Left="10" Canvas.Top="10" />
+            <Label Name="prg_label" Content="{}{0} / Ship {1} of {2}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Foreground="White" FontSize="12"  Canvas.Left="10" Canvas.Top="49" />
+
+            <ProgressBar Name="prg_progress"  Height="15"  Width="322" Canvas.Left="10" Canvas.Top="75" Value="0.5">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FF0F23E8" Offset="0.088"/>
+                        <GradientStop Color="#FF5E6ADC" Offset="0.711"/>
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+            
+            <Image x:Name="img_ship" Height="34" Canvas.Left="271" Canvas.Top="10" Width="59"/>
+
+        </Canvas>
+        <Canvas HorizontalAlignment="Left" Height="100" Margin="687,33,-270,0" VerticalAlignment="Top" Width="100"/>
+
+
+
     </Grid>
 </Window>

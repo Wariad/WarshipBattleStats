@@ -11,8 +11,9 @@
     <AssemblyName>WargamingDataService</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Console</MyType>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -115,10 +116,6 @@
     <ProjectReference Include="..\WargamingAPI\WargamingAPI.vbproj">
       <Project>{de235926-d967-4fcc-9dc3-d4e3a552e6ce}</Project>
       <Name>WargamingAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WargamingDatabase\WargamingDatabase.vbproj">
-      <Project>{58ca4729-9ad5-4fe7-8fec-2a7e5f049cb2}</Project>
-      <Name>WargamingDatabase</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

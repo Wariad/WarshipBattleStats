@@ -1,0 +1,53 @@
+﻿<UserControl x:Class="BattleLogIListtem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WarshipBattleStats"
+             mc:Ignorable="d" Width="250" Height="100">
+    <UserControl.Background>
+        <LinearGradientBrush EndPoint="0.7,1" StartPoint="0.7,0">
+            <GradientStop Color="Green" Offset=".25"/>
+            <GradientStop Color="#FF8B8B8B" Offset="1"/>
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <Grid Margin="0,0,0,0">
+        <Image x:Name="img_Flag" HorizontalAlignment="Left" Height="22" Margin="105,25,0,0" Width="37" Source="pack://application:,,,/Resources/USA.png" VerticalAlignment="Top" ToolTip="Ship Country" />
+        <Image x:Name="img_BattleType" HorizontalAlignment="Left" Height="29" Margin="10,22,0,0" VerticalAlignment="Top" Width="28" Source="pack://application:,,,/Resources/pvp.png" ToolTip="Battle Type"/>
+        <Image x:Name="img_Ship" HorizontalAlignment="Left" Height="34" Margin="43,10,0,0" Width="59" Source="pack://siteoforigin:,,,/Resources/PASA915.png" VerticalAlignment="Top" ToolTip="Ship Image"  />
+        <Image x:Name="img_ShipType" HorizontalAlignment="Left" Height="8" Margin="17,15,0,0" VerticalAlignment="Top"  Source="pack://siteoforigin:,,,/Resources/battleship.png" ToolTip="Ship Class"/>
+
+        <Image x:Name="image4" HorizontalAlignment="Left" Height="20" Margin="139,2,0,0" VerticalAlignment="Top"  Source="pack://application:,,,/Resources/Frag.png" ToolTip="Frags"  />
+        <Image x:Name="image5" HorizontalAlignment="Left" Height="20" Margin="139,22,0,0" VerticalAlignment="Top"  Source="pack://application:,,,/Resources/Planes.png" ToolTip="Planes Killed"  />
+        <Image x:Name="image6" HorizontalAlignment="Left" Height="20" Margin="139,42,0,0" VerticalAlignment="Top"  Source="pack://application:,,,/Resources/Damage.png" ToolTip="Damage Done"  />
+
+        <Label x:Name="lbl_ShipName" Content="North Caroliner" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Top" Foreground="White" ToolTip="Ship Name"/>
+        <Label x:Name="lbl_ShipTier" Content="VIII" HorizontalAlignment="Left" Margin="13,-2,0,0" VerticalAlignment="Top" Foreground="White" FontSize="8" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" ToolTip="Ship Tier"/>
+
+        <Label x:Name="lbl_Frags" Content="2" HorizontalAlignment="Left" Margin="191,-1,0,0" VerticalAlignment="Top" Foreground="White" FontSize="12" FontWeight="Medium" ToolTip="Frags"/>
+        <Label x:Name="lbl_Planes" Content="15" HorizontalAlignment="Left" Margin="191,18,0,0" VerticalAlignment="Top" Foreground="White" FontSize="12"  FontWeight="Medium" ToolTip="Planes Killed"/>
+        <Label x:Name="lbl_Damage" Content="125,698" HorizontalAlignment="Left" Margin="191,38,0,0" VerticalAlignment="Top" Foreground="White" FontSize="12" FontWeight="Medium" ToolTip="Damage Done"/>
+
+        <Label x:Name="lbl_Date" Content="99-99-9999" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10" FontWeight="Medium" ToolTip="Battle Date"/>
+        <Label x:Name="lbl_Time" Content="10:30 AM" HorizontalAlignment="Left" Margin="80,42,0,0" VerticalAlignment="Top" Foreground="White" FontSize="10" FontWeight="Medium" ToolTip="Battle Time"/>
+        <Image x:Name="img_died" HorizontalAlignment="Left" Height="40" Margin="208,4,0,0" VerticalAlignment="Top" Source="pack://application:,,,/Resources/DeadShip.png" Visibility="Hidden" ToolTip="Died" />
+        <Image x:Name="img_survived" HorizontalAlignment="Left" Height="50" Margin="208,6,-3,0" VerticalAlignment="Top" Source="pack://application:,,,/Resources/AliveShip.png" ToolTip="Survived" />
+
+        <Label Name="lbl_battleType"  HorizontalAlignment="Left" HorizontalContentAlignment="Center"  Margin="0,60,0,0" VerticalAlignment="Top" Foreground="AliceBlue"   FontSize="10" ToolTip="Battles" Width="50" FontWeight="Medium" />
+        <Label  Content="WR" HorizontalAlignment="Left" Margin="50,60,0,0" VerticalAlignment="Top" Foreground="AliceBlue"  FontSize="10" ToolTip="Win Rate" Width="35" HorizontalContentAlignment="Center" FontWeight="Medium"/>
+        <Label  Content="FR" HorizontalAlignment="Left" Margin="85,60,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="10" ToolTip="Frag Rate" Width="35"  HorizontalContentAlignment="Center" FontWeight="Medium"/>
+        <Label Content="SR" HorizontalAlignment="Left" Margin="120,60,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="10" ToolTip="Survival Rate" Width="35" HorizontalContentAlignment="Center" FontWeight="Medium"/>
+        <Label  Content="DR" HorizontalAlignment="Left" Margin="155,60,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="10" ToolTip="Destruction Rate" Width="35" HorizontalContentAlignment="Center" FontWeight="Medium"/>
+        <Label  Content="DMG"  HorizontalAlignment="Right"  HorizontalContentAlignment="Center"  Margin="0,60,1,0" VerticalAlignment="Top" Foreground="AliceBlue"  FontSize="10"  ToolTip="Avg Damage" Width="50" FontWeight="Medium"/>
+
+
+        <Label Name="lbl_Battles" Content="99999" HorizontalAlignment="Left" HorizontalContentAlignment="Center"   Margin="0,75,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="12"  ToolTip="Battles" Width="50"/>
+        <Label Name="lbl_WR"  Content=".52" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="12" ToolTip="Win Rate" Width="35" HorizontalContentAlignment="Center"/>
+        <Label Name="lbl_FR"  Content="1.1" HorizontalAlignment="Left" Margin="85,75,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="12" ToolTip="Frag Rate" Width="35" HorizontalContentAlignment="Center"/>
+        <Label Name="lbl_SR" Content=".78" HorizontalAlignment="Left" Margin="120,75,0,0" VerticalAlignment="Top" Foreground="AliceBlue" FontSize="12"  ToolTip="Survival Rate" Width="35" HorizontalContentAlignment="Center"/>
+        <Label Name="lbl_DR"  Content="2.32" HorizontalAlignment="Left" Margin="155,75,0,0" VerticalAlignment="Top" Foreground="AliceBlue"  FontSize="12"   ToolTip="Destruction Rate" Width="35" HorizontalContentAlignment="Center"/>
+        <Label Name="lbl_DMG"  Content="102365" HorizontalAlignment="Right"  HorizontalContentAlignment="Center"  Margin="0,75,1,0" Foreground="AliceBlue"  FontSize="12"  ToolTip="Avg Damage" Width="50"/>
+        <Frame x:Name="frame" Content="" HorizontalAlignment="Left" Height="33" Width="246" Margin="2,64,0,0" VerticalAlignment="Top"  BorderBrush="White"    BorderThickness="1"/>
+
+    </Grid>
+</UserControl>

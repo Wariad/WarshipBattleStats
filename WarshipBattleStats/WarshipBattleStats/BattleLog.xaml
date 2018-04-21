@@ -1,0 +1,133 @@
+﻿<Window x:Class="BattleLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WarshipBattleStats"
+        mc:Ignorable="d"
+        Title="Battle Log" Height="750" MinHeight="150" Width="300" MaxWidth="300" MinWidth="300" WindowStyle="None"  WindowState="Normal"  Icon="Resources/WorldOfWarships.ico"  >
+    <DockPanel Margin="0,0,0,0" >
+        <Grid DockPanel.Dock="Top" Height="50" Name="TitleBar" MouseDown="TitleBar_MouseDown">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF021F08"/>
+                    <GradientStop Color="#FF5F8F6B" Offset="0.937"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image Width="25" Height="25" HorizontalAlignment="Left" Margin="10" Source="pack://application:,,,/Resources/WorldOfWarships.ico" VerticalAlignment="Center"/>
+            <Label x:Name="lbl_title" Content="Battle Log" HorizontalAlignment="Left" Margin="35,10,0,0" VerticalAlignment="Center" Foreground="White" FontSize="14" Height="40" Width="247" FontWeight="Medium" FontFamily="Segoe UI Symbol" />
+
+        </Grid>
+
+        <Menu x:Name="menu" DockPanel.Dock="Top" >
+                <MenuItem Name="mnu_AlwaysOnTop" Header="Always On Top" IsCheckable="True" Click="mnu_AlwaysOnTop_Click" />
+            <MenuItem Name="mnu_filter" Header="_View" ToolTip="Include / Exclude">
+                <MenuItem  Name="mnu_summery_pvp" Tag="PVP" Header="Random (PVP)" IsCheckable="True" Click="mnu_summery_Click">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/pvp.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnu_summery_pve" Tag="PVE" Header="Co-Op (PVE)" IsCheckable="True" Click="mnu_summery_Click"  >
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/pve.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnu_filter_ShipClass_Battle" Tag="BattleShip" Header="Battleship" IsCheckable="True" Click="mnu_summery_Click">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/BattleShip.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnu_filter_ShipClass_Cruiser" Tag="Cruiser" Header="Cruise" IsCheckable="True" Click="mnu_summery_Click" >
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/cruiser.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnu_filter_ShipClass_Destroyer" Tag ="Destroyer" Header="Destroyer" IsCheckable="True" Click="mnu_summery_Click">
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/destroyer.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Name="mnu_filter_ShipClass_Carrier" Tag="AirCarrier"  Header="Carrier" IsCheckable="True" Click="mnu_summery_Click" >
+                    <MenuItem.Icon>
+                        <Image Source="pack://application:,,,/Resources/aircarrier.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+               
+            </MenuItem>
+
+            <MenuItem Name="mnu_accounts" Header="_Account" ToolTip="Account to show."  Click="mnu_accounts_Click"/>
+            
+            <MenuItem Name="mnu_close" Header="Close" Click="mnu_close_Click" ToolTip="Close Log"/>
+        </Menu>
+        <Grid Name="grd_StatSummery"  DockPanel.Dock="Top" Height="66" >
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FF021F08"/>
+                    <GradientStop Color="#FF5F8F6B" Offset="0.937"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+
+            </Grid.ColumnDefinitions>
+            <Image Grid.Row="0" Grid.Column="1" Margin="1" Source="pack://application:,,,/Resources/WorldOfWarships.ico" ToolTip="Battles"/>
+            <Image Grid.Row="0" Grid.Column="2" Margin="3" Source="pack://application:,,,/Resources/winner.png" ToolTip="Wins" />
+            <Label Grid.Row="0" Grid.Column="3"  Content="WR" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10" ToolTip="WR - Win Rate. The percentage of time you win."/>
+            <Image Grid.Row="0" Grid.Column="4" Margin="1" Source="pack://application:,,,/Resources/frag.png" ToolTip="Kills"/>
+            <Label Grid.Row="0" Grid.Column="5"  Content="FR" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10" ToolTip="FR - Frag Rate. The number of ships you kill per battle."/>
+            <Image Grid.Row="0" Grid.Column="6" Margin="1" Source="pack://application:,,,/Resources/aliveship.png" ToolTip="Battles Survived"/>
+            <Label Grid.Row="0" Grid.Column="7"  Content="SWR" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10" ToolTip="SWR - Survival Win Rate. The chance of you winning if you survive, Higher is better."/>
+            <Label Grid.Row="0" Grid.Column="8"  Content="SLR" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10" ToolTip="SLR - Survival Loss Rate. The chance of you loosing if you survive, Lower is better."/>
+            <Label Grid.Row="0" Grid.Column="9"  Content="DR" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10" ToolTip="DR - Destruction Rate. The number of ships you kill for each time you are killed."/>
+            <Image Grid.Row="1" Grid.Column="0" Margin="1" Source="pack://application:,,,/Resources/pvp.png" ToolTip="PVP - Random"/>
+            <Image Grid.Row="2" Grid.Column="0" Margin="1" Source="pack://application:,,,/Resources/pve.png" ToolTip="PVE - Co-Op"/>
+
+            <Label Grid.Row="1" Grid.Column="1" Name="lbl_pvp_battles"  Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="2" Name="lbl_pvp_wins"  Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="3" Name="lbl_pvp_winrate"  Content="55%" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="4" Name="lbl_pvp_frags"  Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="5" Name="lbl_pvp_fr"  Content=".68" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="6" Name="lbl_pvp_survived"  Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="7" Name="lbl_pvp_lsr"  Content=".68" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="8" Name="lbl_pvp_dsr"  Content=".32" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="1" Grid.Column="9" Name="lbl_pvp_dr"  Content="1.12" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+
+            <Label Grid.Row="2" Grid.Column="1" Name="lbl_pve_battles"  Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="2" Name="lbl_pve_wins" Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="3" Name="lbl_pve_winrate" Content="55%" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="4" Name="lbl_pve_frags" Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="5" Name="lbl_pve_fr" Content=".68" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="6" Name="lbl_pve_survived" Content="999" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="7" Name="lbl_pve_lsr" Content=".68" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="8" Name="lbl_pve_dsr"  Content=".32" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+            <Label Grid.Row="2" Grid.Column="9" Name="lbl_pve_dr"  Content="1.12" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0" Foreground="White" FontWeight="Medium" FontSize="10"/>
+
+        </Grid>
+        <ListView Name="BattleLogList" DockPanel.Dock="Top" BorderBrush="{x:Null}" >
+            <ListView.Background>
+                <ImageBrush ImageSource="Resources/WorldOfWarships.ico" Stretch="None" TileMode="Tile"/>
+            </ListView.Background>
+
+        </ListView>
+    </DockPanel>
+
+
+
+</Window>

@@ -15,6 +15,17 @@ Public MustInherit Class DataAccess
 
 #Region "Methods..."
 
+    Protected Shared Function GetImage(reader As IDataReader, field As Int32) As Drawing.Image
+
+        If reader.IsDBNull(field) Then
+            Return Nothing
+        Else
+            Using Stream As New IO.MemoryStream(GetBytes(reader, field))
+                Return Drawing.Image.FromStream(Stream)
+            End Using
+        End If
+
+    End Function
 
     Protected Shared Function GetValue(Of t)(reader As IDataReader, field As Int32, defaultValue As Object) As t
 
@@ -32,6 +43,16 @@ Public MustInherit Class DataAccess
             Return 0
         Else
             Return CInt(reader.GetValue(field))
+        End If
+
+    End Function
+
+    Protected Shared Function GetEnum(Of t)(ByVal reader As IDataReader, ByVal field As Int32) As t
+
+        If reader.IsDBNull(field) Then
+            Return Nothing
+        Else
+            Return [Enum].Parse(GetType(t), reader.GetString(field))
         End If
 
     End Function
@@ -156,6 +177,22 @@ Public MustInherit Class DataAccess
         Else
             Return reader.GetByte(field)
         End If
+
+    End Function
+
+    Protected Shared Function GetSqlDateTime(ByVal reader As IDataReader, ByVal field As Int32) As DateTime
+
+        If reader.IsDBNull(field) Then
+            Return DateTime.MinValue
+        Else
+            Return DateTime.Parse(reader.GetString(field))
+        End If
+
+    End Function
+
+    Protected Shared Function DateTimeToSlqDateTime(rDate As DateTime) As String
+
+        Return String.Format("{0} {1}", DateToSqlDate(rDate), TimeToSqlTime(rDate))
 
     End Function
 
